@@ -5,8 +5,8 @@
 <mat-vertical-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="personalInfo">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field>
+      <ng-template matStepLabel>conatct information</ng-template>
+      <mat-form-field class="full-width ">
         <input
           matInput
           placeholder="Last name, First name"
@@ -14,7 +14,12 @@
           required
         />
       </mat-form-field>
-      <mat-form-field>
+
+      <mat-error *ngIf="fullName.touched && fullName.errors">
+        name is required
+      </mat-error>
+
+      <mat-form-field class="full-width ">
         <input
           matInput
           placeholder="example@domain.com"
@@ -23,16 +28,38 @@
           required
         />
       </mat-form-field>
-      <mat-form-field>
-        <input
-          matInput
-          placeholder="9999999999"
-          formControlName="phone"
-          type="tel"
-          required
-        />
-      </mat-form-field>
+
+      <mat-error *ngIf="email.touched && email.errors">
+        enter a proper email
+      </mat-error>
+
+      <div formArrayName="phones">
+        <div
+          *ngFor="let phone of phones.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="9999999999"
+              formControlName="phone"
+              type="tel"
+              required
+            />
+          </mat-form-field>
+          <ng-template [ngIf]="i !== 0">
+            <button mat-icon-button (click)="removePhone(i)" color="warn">
+              <mat-icon>
+                remove_circle
+              </mat-icon>
+            </button>
+          </ng-template>
+        </div>
+      </div>
       <div>
+        <button mat-icon-button (click)="addPhone()" color="primary">
+          <mat-icon>add</mat-icon>
+        </button>
         <button mat-button matStepperNext>Next</button>
       </div>
     </form>
