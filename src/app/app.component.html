@@ -76,12 +76,16 @@
             required
           />
         </mat-form-field>
+        <mat-error *ngIf="education.touched && education.errors">
+          Education is required
+        </mat-error>
         <mat-form-field class="full-width ">
           <input
             matInput
             [matDatepicker]="picker"
             placeholder="Year of passing"
             formControlName="date"
+            required
           />
           <mat-datepicker-toggle
             matSuffix
@@ -89,29 +93,45 @@
           ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+        <mat-error
+        *ngIf="date.touched && date.errors"
+        >
+        Enter a valid date of the formate of dd/mm/yyyy
+      </mat-error>
       </div>
           <mat-form-field>
             <input
             matInput
             placeholder="Total experience in years"
-            type="number"
+            type="tel"
             formControlName="totalExperience"
             />
           </mat-form-field>
+          <mat-error
+          *ngIf="totalExperience.touched && totalExperience.errors"
+          >
+          Experience must be grater then or equal to 0
+          </mat-error>
           <mat-form-field>
             <input
             matInput
             placeholder="relevant experience in years"
-            type="number"
+            type="tel"
             formControlName="relevantExperience"
             />
           </mat-form-field>
+          <mat-error
+          *ngIf="relevantExperience.touched && relevantExperience.errors"
+          >
+          Experience must be grater then or equal to 0
+          </mat-error>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
+
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     You are now done.

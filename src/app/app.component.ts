@@ -38,7 +38,15 @@ export class AppComponent implements OnInit {
     // education and experience form
     const education = this.formBuilder.group({
       education: ['', [Validators.required]],
-      date: ['', [Validators.required]],
+      date: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            '^([0-2][0-9]|(3)[0-1])(/)(((0)[0-9])|((1)[0-2]))(/)d{4}$',
+          ),
+        ],
+      ],
     });
     this.educationAndExperience = this.formBuilder.group({
       education,
@@ -77,7 +85,10 @@ export class AppComponent implements OnInit {
     return this.personalInfo.get('email');
   }
   get education() {
-    return this.educationAndExperience.get('education');
+    return this.educationAndExperience.get('education').get('education');
+  }
+  get date() {
+    return this.educationAndExperience.get('education').get('date');
   }
   get totalExperience() {
     return this.educationAndExperience.get('totalExperience');
