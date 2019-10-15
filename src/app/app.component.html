@@ -5,55 +5,62 @@
 <mat-vertical-stepper [linear]="isLinear" #stepper>
   <mat-step [stepControl]="personalInfo">
     <form [formGroup]="personalInfo">
-      <ng-template matStepLabel>Conatct</ng-template>
-      <mat-form-field class="full-width ">
-        <input
-          matInput
-          placeholder="Last name, First name"
-          formControlName="fullName"
-          required
-        />
-      </mat-form-field>
-
-      <mat-error *ngIf="fullName.touched && fullName.errors">
-        name is required
-      </mat-error>
-
-      <mat-form-field class="full-width ">
-        <input
-          matInput
-          placeholder="example@domain.com"
-          type="email"
-          formControlName="email"
-          required
-        />
-      </mat-form-field>
-
-      <mat-error *ngIf="email.touched && email.errors">
-        enter a proper email
-      </mat-error>
-
+      <ng-template matStepLabel>Contact</ng-template>
+      <div class="full-width">
+        <mat-label>Full Name</mat-label>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Last name, First name"
+            formControlName="fullName"
+            required
+          />
+        </mat-form-field>
+        <mat-error *ngIf="fullName.touched && fullName.errors">
+          name is required
+        </mat-error>
+      </div>
+      <div class="full-width ">
+        <mat-label>Email</mat-label>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="example@domain.com"
+            type="email"
+            formControlName="email"
+            required
+          />
+        </mat-form-field>
+        <mat-error *ngIf="email.touched && email.errors">
+          enter a proper email
+        </mat-error>
+      </div>
       <div formArrayName="phones">
         <div
           *ngFor="let phone of phones.controls; let i = index"
           [formGroupName]="i"
         >
-          <mat-form-field>
-            <input
-              matInput
-              placeholder="9999999999"
-              formControlName="phone"
-              type="tel"
-              required
-            />
-          </mat-form-field>
-          <ng-template [ngIf]="i !== 0">
-            <button mat-icon-button (click)="removePhone(i)" color="warn">
-              <mat-icon>
-                remove_circle
-              </mat-icon>
-            </button>
-          </ng-template>
+          <div class="full-width ">
+            <mat-label>Phone ({{ i }})</mat-label>
+            <div style="display:flex; align-items:center">
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="9999999999"
+                  formControlName="phone"
+                  type="tel"
+                  required
+                />
+              </mat-form-field>
+              <ng-template [ngIf]="i !== 0">
+                <button mat-icon-button (click)="removePhone(i)" color="warn">
+                  <mat-icon>
+                    remove_circle
+                  </mat-icon>
+                </button>
+              </ng-template>
+            </div>
+          </div>
         </div>
       </div>
       <div>
@@ -68,70 +75,146 @@
     <form [formGroup]="educationAndExperience">
       <ng-template matStepLabel>Education & Experience</ng-template>
       <div formGroupName="education">
-        <mat-form-field class="full-width ">
+        <div class="full-width ">
+          <mat-label>Highest education</mat-label>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Highest education with specialization"
+              formControlName="education"
+              required
+            />
+          </mat-form-field>
+          <mat-error *ngIf="education.touched && education.errors">
+            Education is required
+          </mat-error>
+        </div>
+        <div class="full-width ">
+          <mat-label>passing Year</mat-label>
+          <mat-form-field>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              placeholder="Year of passing"
+              formControlName="date"
+              required
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-error *ngIf="date.touched && date.errors">
+            Enter a valid date of the formate of yyyy-mm-dd
+          </mat-error>
+        </div>
+      </div>
+      <div class="full-width">
+        <mat-label>Total experience in years</mat-label>
+        <mat-form-field>
           <input
             matInput
-            placeholder="Highest education with specialization"
-            formControlName="education"
+            placeholder="2"
+            formControlName="totalExperience"
             required
           />
         </mat-form-field>
-        <mat-error *ngIf="education.touched && education.errors">
-          Education is required
+        <mat-error *ngIf="totalExperience.touched && totalExperience.errors">
+          Experience must be grater then or equal to 0
         </mat-error>
-        <mat-form-field class="full-width ">
+      </div>
+      <div>
+        <mat-label>relevant experience in years</mat-label>
+        <mat-form-field>
           <input
             matInput
-            [matDatepicker]="picker"
-            placeholder="Year of passing"
-            formControlName="date"
+            placeholder="2"
+            formControlName="relevantExperience"
             required
           />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <mat-error
-        *ngIf="date.touched && date.errors"
-        >
-        Enter a valid date of the formate of dd/mm/yyyy
-      </mat-error>
-      </div>
-          <mat-form-field>
-            <input
-            matInput
-            placeholder="Total experience in years"
-            type="tel"
-            formControlName="totalExperience"
-            />
-          </mat-form-field>
-          <mat-error
-          *ngIf="totalExperience.touched && totalExperience.errors"
-          >
-          Experience must be grater then or equal to 0
-          </mat-error>
-          <mat-form-field>
-            <input
-            matInput
-            placeholder="relevant experience in years"
-            type="tel"
-            formControlName="relevantExperience"
-            />
-          </mat-form-field>
-          <mat-error
           *ngIf="relevantExperience.touched && relevantExperience.errors"
-          >
+        >
           Experience must be grater then or equal to 0
-          </mat-error>
+        </mat-error>
+      </div>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
-
+  <mat-step [stepControl]="ctc">
+    <form [formGroup]="ctc">
+      <ng-template matStepLabel>CTC</ng-template>
+      <div class="full-width">
+        <mat-label>current CTC</mat-label>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="200000"
+            formControlName="currentCTC"
+            required
+          />
+        </mat-form-field>
+        <mat-error *ngIf="currentCTC.touched && currentCTC.errors">
+          specify current ctc
+        </mat-error>
+      </div>
+      <div class="full-width">
+        <mat-label>expected CTC</mat-label>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="300000"
+            formControlName="expectedCTC"
+            required
+          />
+        </mat-form-field>
+        <mat-error *ngIf="expectedCTC.touched && expectedCTC.errors">
+          specify expected ctc
+        </mat-error>
+      </div>
+      <div class="full-width">
+        <mat-label>Notice period in number of days</mat-label>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="30"
+            formControlName="noticePeriod"
+            required
+          />
+        </mat-form-field>
+        <mat-error *ngIf="noticePeriod.touched && noticePeriod.errors">
+          number of days for notice
+        </mat-error>
+      </div>
+      <div class="full-width">
+        <mat-label>Reason for job change</mat-label>
+        <mat-form-field>
+          <mat-label>At lest 20 charters</mat-label>
+          <textarea
+            matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            formControlName="reasonForJobSwitch"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"
+          >
+          </textarea>
+        </mat-form-field>
+        <mat-error *ngIf="reason.touched && reason.errors">
+          reason for switching job in min 20 chars
+        </mat-error>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     You are now done.

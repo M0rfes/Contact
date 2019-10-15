@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   secondFormGroup: FormGroup;
   personalInfo: FormGroup;
   educationAndExperience: FormGroup;
-
+  ctc: FormGroup;
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
@@ -38,21 +38,39 @@ export class AppComponent implements OnInit {
     // education and experience form
     const education = this.formBuilder.group({
       education: ['', [Validators.required]],
-      date: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            '^([0-2][0-9]|(3)[0-1])(/)(((0)[0-9])|((1)[0-2]))(/)d{4}$',
-          ),
-        ],
-      ],
+      date: ['', [Validators.required]],
     });
     this.educationAndExperience = this.formBuilder.group({
       education,
-      totalExperience: [0, [Validators.required, Validators.min(0)]],
-      relevantExperience: [0, [Validators.required, Validators.min(0)]],
+      totalExperience: [
+        '',
+        [
+          Validators.required,
+          Validators.min(0),
+          Validators.pattern('^[0-9]{1,2}$'),
+          Validators.maxLength(2),
+          Validators.minLength(1),
+        ],
+      ],
+      relevantExperience: [
+        '',
+        [
+          Validators.required,
+          Validators.min(0),
+          Validators.pattern('^[0-9]{1,2}$'),
+          Validators.maxLength(2),
+          Validators.minLength(1),
+        ],
+      ],
     });
+    // CTC form
+    this.ctc = this.formBuilder.group({
+      currentCTC: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      expectedCTC: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      noticePeriod: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      reasonForJobSwitch: ['', [Validators.required, Validators.minLength(20)]],
+    });
+    //
   }
   get phones() {
     return this.personalInfo.get('phones') as FormArray;
@@ -95,6 +113,18 @@ export class AppComponent implements OnInit {
   }
   get relevantExperience() {
     return this.educationAndExperience.get('relevantExperience');
+  }
+  get currentCTC() {
+    return this.ctc.get('currentCTC');
+  }
+  get expectedCTC() {
+    return this.ctc.get('expectedCTC');
+  }
+  get noticePeriod() {
+    return this.ctc.get('noticePeriod');
+  }
+  get reason() {
+    return this.ctc.get('reasonForJobSwitch');
   }
   str(msg: object) {
     return JSON.stringify(msg);

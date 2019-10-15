@@ -13,6 +13,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -28,6 +31,9 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatIconModule,
     MatDatepickerModule,
     MatMomentDateModule,
+    TextFieldModule,
+    MatSelectModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
