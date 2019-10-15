@@ -11,6 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -24,6 +26,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatStepperModule,
     MatButtonModule,
     MatIconModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -3,9 +3,9 @@
 </button>
 
 <mat-vertical-stepper [linear]="isLinear" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
+  <mat-step [stepControl]="personalInfo">
     <form [formGroup]="personalInfo">
-      <ng-template matStepLabel>conatct information</ng-template>
+      <ng-template matStepLabel>Conatct</ng-template>
       <mat-form-field class="full-width ">
         <input
           matInput
@@ -64,17 +64,48 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field>
-        <input
-          matInput
-          placeholder="Address"
-          formControlName="secondCtrl"
-          required
-        />
-      </mat-form-field>
+  <mat-step [stepControl]="educationAndExperience">
+    <form [formGroup]="educationAndExperience">
+      <ng-template matStepLabel>Education & Experience</ng-template>
+      <div formGroupName="education">
+        <mat-form-field class="full-width ">
+          <input
+            matInput
+            placeholder="Highest education with specialization"
+            formControlName="education"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field class="full-width ">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Year of passing"
+            formControlName="date"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+          <mat-form-field>
+            <input
+            matInput
+            placeholder="Total experience in years"
+            type="number"
+            formControlName="totalExperience"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+            matInput
+            placeholder="relevant experience in years"
+            type="number"
+            formControlName="relevantExperience"
+            />
+          </mat-form-field>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>

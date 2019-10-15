@@ -8,13 +8,14 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   isLinear = false;
-  firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   personalInfo: FormGroup;
+  educationAndExperience: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
+    // personal info form
     const phone = this.formBuilder.group({
       phone: [
         '',
@@ -33,6 +34,16 @@ export class AppComponent implements OnInit {
     });
     this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required],
+    });
+    // education and experience form
+    const education = this.formBuilder.group({
+      education: ['', [Validators.required]],
+      date: ['', [Validators.required]],
+    });
+    this.educationAndExperience = this.formBuilder.group({
+      education,
+      totalExperience: [0, [Validators.required, Validators.min(0)]],
+      relevantExperience: [0, [Validators.required, Validators.min(0)]],
     });
   }
   get phones() {
@@ -64,6 +75,15 @@ export class AppComponent implements OnInit {
   }
   get email() {
     return this.personalInfo.get('email');
+  }
+  get education() {
+    return this.educationAndExperience.get('education');
+  }
+  get totalExperience() {
+    return this.educationAndExperience.get('totalExperience');
+  }
+  get relevantExperience() {
+    return this.educationAndExperience.get('relevantExperience');
   }
   str(msg: object) {
     return JSON.stringify(msg);
