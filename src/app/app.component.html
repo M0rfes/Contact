@@ -6,35 +6,31 @@
   <mat-step [stepControl]="personalInfo">
     <form [formGroup]="personalInfo">
       <ng-template matStepLabel>Contact</ng-template>
-      <div class="full-width">
-        <mat-form-field>
+        <mat-form-field  class="full-width">
             <mat-label>Full Name</mat-label>
-          <input
-            matInput
-            placeholder="Last name, First name"
-            formControlName="fullName"
-            required
-          />
+            <input
+              matInput
+              placeholder="Last name, First name"
+              formControlName="fullName"
+              required
+            />
         </mat-form-field>
         <mat-error *ngIf="fullName.touched && fullName.errors">
           name is required
         </mat-error>
-      </div>
-      <div class="full-width ">
-        <mat-form-field>
+        <mat-form-field  class="full-width ">
             <mat-label>Email</mat-label>
-          <input
-            matInput
-            placeholder="example@domain.com"
-            type="email"
-            formControlName="email"
-            required
-          />
+            <input
+              matInput
+              placeholder="example@domain.com"
+              type="email"
+              formControlName="email"
+              required
+            />
         </mat-form-field>
         <mat-error *ngIf="email.touched && email.errors">
           enter a proper email
         </mat-error>
-      </div>
       <div formArrayName="phones">
         <div
           *ngFor="let phone of phones.controls; let i = index"
@@ -74,55 +70,48 @@
   <mat-step>
     <form>
         <ng-template matStepLabel>Reference</ng-template>
-        <div class="full-width">
-          <mat-form-field>
+          <mat-form-field  class="full-width">
             <mat-label>Name of reference</mat-label>
             <input
             matInput
             placeholder="Raj Thakur"
             />
           </mat-form-field>
-        </div>
-        <div class="full-width">
-            <mat-form-field>
+          <mat-form-field class="full-width">
               <mat-label>phone Number</mat-label>
               <input
               matInput
               placeholder="88888888"
               type="tel"
               />
-            </mat-form-field>
-          </div>
+          </mat-form-field>
     </form>
   </mat-step>
   <mat-step [stepControl]="educationAndExperience">
     <form [formGroup]="educationAndExperience">
       <ng-template matStepLabel>Education & Experience</ng-template>
       <div formGroupName="education">
-        <div class="full-width ">
-          <mat-label>Highest education</mat-label>
-          <mat-form-field>
-            <input
-              matInput
-              placeholder="Highest education with specialization"
-              formControlName="education"
-              required
-            />
+          <mat-form-field class="full-width ">
+              <mat-label>Highest education</mat-label>
+              <input
+                matInput
+                placeholder="Highest education with specialization"
+                formControlName="education"
+                required
+              />
           </mat-form-field>
           <mat-error *ngIf="education.touched && education.errors">
             Education is required
           </mat-error>
-        </div>
-        <div class="full-width ">
-          <mat-label>passing Year</mat-label>
-          <mat-form-field>
-            <input
-              matInput
-              [matDatepicker]="picker"
-              placeholder="Year of passing"
-              formControlName="date"
-              required
-            />
+          <mat-form-field class="full-width ">
+              <mat-label>passing Year</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                placeholder="Year of passing"
+                formControlName="date"
+                required
+              />
             <mat-datepicker-toggle
               matSuffix
               [for]="picker"
@@ -133,24 +122,22 @@
             Enter a valid date of the formate of yyyy-mm-dd
           </mat-error>
         </div>
-      </div>
-      <div class="full-width">
-        <mat-label>Total experience in years</mat-label>
-        <mat-form-field>
+      <div >
+        <mat-form-field class="full-width">
+          <mat-label>Total experience in years</mat-label>
           <input
-            matInput
-            placeholder="2"
-            formControlName="totalExperience"
-            required
-          />
+              matInput
+              placeholder="2"
+              formControlName="totalExperience"
+              required
+            />
         </mat-form-field>
         <mat-error *ngIf="totalExperience.touched && totalExperience.errors">
           Experience must be grater then or equal to 0
         </mat-error>
       </div>
-      <div>
-        <mat-label>relevant experience in years</mat-label>
-        <mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>relevant experience in years</mat-label>
           <input
             matInput
             placeholder="2"
@@ -163,7 +150,6 @@
         >
           Experience must be grater then or equal to 0
         </mat-error>
-      </div>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
@@ -173,66 +159,58 @@
   <mat-step [stepControl]="ctc">
     <form [formGroup]="ctc">
       <ng-template matStepLabel>CTC</ng-template>
-      <div class="full-width">
-        <mat-label>current CTC</mat-label>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="200000"
-            formControlName="currentCTC"
-            required
-          />
+        <mat-form-field class="full-width">
+            <mat-label>current CTC</mat-label>
+            <input
+              matInput
+              placeholder="200000"
+              formControlName="currentCTC"
+              required
+            />
         </mat-form-field>
         <mat-error *ngIf="currentCTC.touched && currentCTC.errors">
           specify current ctc
         </mat-error>
-      </div>
-      <div class="full-width">
-        <mat-label>expected CTC</mat-label>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="300000"
-            formControlName="expectedCTC"
-            required
-          />
+        <mat-form-field class="full-width">
+            <mat-label>expected CTC</mat-label>
+            <input
+              matInput
+              placeholder="300000"
+              formControlName="expectedCTC"
+              required
+            />
         </mat-form-field>
         <mat-error *ngIf="expectedCTC.touched && expectedCTC.errors">
           specify expected ctc
         </mat-error>
-      </div>
-      <div class="full-width">
-        <mat-label>Notice period in number of days</mat-label>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="30"
-            formControlName="noticePeriod"
-            required
-          />
+        <mat-form-field class="full-width">
+          <mat-label >Notice period in number of days</mat-label>
+            <input
+              matInput
+              placeholder="30"
+              formControlName="noticePeriod"
+              required
+            />
         </mat-form-field>
         <mat-error *ngIf="noticePeriod.touched && noticePeriod.errors">
           number of days for notice
         </mat-error>
-      </div>
-      <div class="full-width">
-        <mat-label>Reason for job change</mat-label>
-        <mat-form-field>
-          <mat-label>At lest 20 charters</mat-label>
-          <textarea
-            matInput
-            cdkTextareaAutosize
-            #autosize="cdkTextareaAutosize"
-            formControlName="reasonForJobSwitch"
-            cdkAutosizeMinRows="1"
-            cdkAutosizeMaxRows="5"
-          >
-          </textarea>
+        <mat-form-field  class="full-width">
+              <mat-label >Reason for job change</mat-label>
+            <mat-label>At lest 20 charters</mat-label>
+            <textarea
+              matInput
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              formControlName="reasonForJobSwitch"
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5"
+            >
+            </textarea>
         </mat-form-field>
         <mat-error *ngIf="reason.touched && reason.errors">
           reason for switching job in min 20 chars
         </mat-error>
-      </div>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
@@ -242,54 +220,46 @@
   <mat-step>
     <form>
       <ng-template matStepLabel>Location</ng-template>
-      <div class="full-width">
-        <mat-label>
-          Current location
-        </mat-label>
-        <mat-form-field>
-          <input
-          matInput
-          placeholder="bhandup"
-          required
-          />
+        <mat-form-field class="full-width">
+          <mat-label>
+            Current location
+          </mat-label>
+            <input
+            matInput
+            placeholder="bhandup"
+            required
+            />
         </mat-form-field>
-      </div>
-      <div class="full-width">
-        <mat-label>
-          Current job location
-        </mat-label>
         <mat-form-field>
-          <input
-          matInput
-          placeholder="bhandup"
-          required
-          />
+          <mat-label class="full-width">
+            Current job location
+          </mat-label>
+            <input
+            matInput
+            placeholder="bhandup"
+            required
+            />
         </mat-form-field>
-      </div>
-      <div class="full-width">
-        <mat-label>
-          Railway Station/District/State
-        </mat-label>
-        <mat-form-field>
-          <input
-          matInput
-          placeholder="mumbai"
-          required
-          />
+        <mat-form-field class="full-width">
+          <mat-label>
+            Railway Station/District/State
+          </mat-label>
+            <input
+            matInput
+            placeholder="mumbai"
+            required
+            />
         </mat-form-field>
-      </div>
-      <div class="full-width">
-        <mat-label>
-        Preferred Job Location
-        </mat-label>
-        <mat-form-field>
-          <input
-          matInput
-          placeholder="mumbai"
-          required
-          />
+        <mat-form-field class="full-width">
+          <mat-label>
+          Preferred Job Location
+          </mat-label>
+            <input
+            matInput
+            placeholder="mumbai"
+            required
+            />
         </mat-form-field>
-      </div>
     </form>
   </mat-step>
   <mat-step>
